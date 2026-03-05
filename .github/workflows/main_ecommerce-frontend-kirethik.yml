@@ -1,0 +1,49 @@
+name: Deploy Frontend to Azur App Service - ecommerce-frontend-kirethik
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+          
+      - name: Build Next.js application
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_755CB624CE19401A943806CB4B451DF5 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_81C66415FAB747C882E6C57C94D5ED1A }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_24588C6CE82B467DA7886CBFDEC76A2F }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ecommerce-frontend-kirethik
+          package: ./frontend
