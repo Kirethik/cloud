@@ -1,77 +1,74 @@
 name: Build and deploy Backend to Azure Web App - ecommerce-backend
 
 on:
-push:
-branches:
-- main
-paths:
-- 'backend/**'
-workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+  workflow_dispatch:
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
 
-permissions:
-  contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v3
-    with:
-      node-version: '20'
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm install
 
-  - name: Install dependencies
-    run: |
-      cd backend
-      npm install
+      - name: Generate Prisma Client
+        run: |
+          cd backend
+          npx prisma generate
 
-  - name: Generate Prisma Client
-    run: |
-      cd backend
-      npx prisma generate
+      - name: Build backend
+        run: |
+          cd backend
+          npm run build
 
-  - name: Build backend
-    run: |
-      cd backend
-      npm run build
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-app
+          path: backend
 
-  - name: Upload backend artifact
-    uses: actions/upload-artifact@v4
-    with:
-      name: backend-app
-      path: backend
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
+    permissions:
+      id-token: write
+      contents: read
 
-deploy:
-runs-on: ubuntu-latest
-needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-app
 
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9F04D034FAEE4AF5BEA706B904C86412 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9CA4C987938841599A4D138E67BFBE92 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D091270EC27F4B2D9351F2FF82D6C1E3 }}
 
-permissions:
-  id-token: write
-  contents: read
-
-steps:
-  - name: Download artifact
-    uses: actions/download-artifact@v4
-    with:
-      name: backend-app
-
-  - name: Azure Login
-    uses: azure/login@v2
-    with:
-      client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9F04D034FAEE4AF5BEA706B904C86412 }}
-      tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9CA4C987938841599A4D138E67BFBE92 }}
-      subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D091270EC27F4B2D9351F2FF82D6C1E3 }}
-
-  - name: Deploy backend to Azure
-    uses: azure/webapps-deploy@v3
-    with:
-      app-name: ecommerce-backend
-      slot-name: Production
-      package: .
+      - name: Deploy backend to Azure
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ecommerce-backend
+          slot-name: Production
+          package: .
