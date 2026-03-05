@@ -17,7 +17,7 @@ export const connectSqlDB = async () => {
     } catch (error) {
         telemetry?.trackException({ exception: error as Error });
         console.error('❌ Azure SQL Connection Error:', error);
-        process.exit(1);
+        console.warn('⚠️ Server will continue running without SQL DB. SQL-dependent routes may fail.');
     }
 };
 
