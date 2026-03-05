@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: '20'
@@ -23,14 +23,22 @@ jobs:
           cd frontend
           npm install
 
-      - name: Build Next.js app
+      - name: Build Next.js
         run: |
           cd frontend
           npm run build
 
-      - name: Deploy to Azure Web App
+      # LOGIN TO AZURE
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_755CB624CE19401A943806CB4B451DF5 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_81C66415FAB747C882E6C57C94D5ED1A }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_24588C6CE82B467DA7886CBFDEC76A2F }}
+
+      - name: Deploy to Azure
         uses: azure/webapps-deploy@v3
         with:
           app-name: ecommerce-frontend-kirethik
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          slot-name: Production
           package: frontend
