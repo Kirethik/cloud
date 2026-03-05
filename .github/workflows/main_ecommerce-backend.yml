@@ -12,7 +12,7 @@ jobs:
 build:
 runs-on: ubuntu-latest
 
-```
+
 permissions:
   contents: read
 
@@ -45,13 +45,13 @@ steps:
     with:
       name: backend-app
       path: backend
-```
+
 
 deploy:
 runs-on: ubuntu-latest
 needs: build
 
-```
+
 permissions:
   id-token: write
   contents: read
@@ -75,4 +75,3 @@ steps:
       app-name: ecommerce-backend
       slot-name: Production
       package: .
-```
