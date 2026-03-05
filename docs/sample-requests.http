@@ -1,0 +1,76 @@
+### Auth API
+
+# Register User
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@domain.com",
+  "password": "supersecurepassword123"
+}
+
+###
+
+# Login
+# @name loginReq
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@domain.com",
+  "password": "supersecurepassword123"
+}
+
+### 
+@token = {{loginReq.response.body.token}}
+
+### Products API
+
+# Get All Products (Cached)
+GET http://localhost:8080/api/v1/products
+
+###
+
+# Create Product
+POST http://localhost:8080/api/v1/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Azure T-Shirt",
+  "description": "High quality cloud-native tee.",
+  "price": 25.50,
+  "category": "Clothing",
+  "imageUrl": "https://example.com/shirt.jpg",
+  "stock": 100
+}
+
+### Orders API
+
+# Create Order
+POST http://localhost:8080/api/v1/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "total_price": 25.50,
+  "items": [
+    {
+      "product_id": "product-uuid-here",
+      "quantity": 1,
+      "price": 25.50
+    }
+  ],
+  "shippingAddress": {
+    "fullName": "John Doe",
+    "address": "123 Cloud Ave",
+    "city": "Seattle",
+    "zipCode": "98001"
+  }
+}
+
+###
+
+# Get User Orders
+GET http://localhost:8080/api/v1/orders
+Authorization: Bearer {{token}}
