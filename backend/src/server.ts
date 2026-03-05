@@ -55,7 +55,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // Centralized Error middleware
 app.use(errorHandler);
 
-const PORT = env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, async () => {
     console.log(`🚀 Server running in ${env.NODE_ENV} mode on port ${PORT}`);
