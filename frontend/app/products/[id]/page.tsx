@@ -31,7 +31,7 @@ export default function ProductDetail() {
     };
 
     return (
-        <div className="max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+        <div className="max-w-6xl mx-auto bg-white  rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row">
             <div className="md:w-1/2 relative h-96 md:h-auto bg-gray-100">
                 <Image
                     src={product.imageUrl || '/placeholder.jpg'}
@@ -44,14 +44,14 @@ export default function ProductDetail() {
 
             <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                 <span className="text-primary-600 font-bold tracking-wide uppercase">{product.category}</span>
-                <h1 className="mt-2 text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
+                <h1 className="mt-2 text-3xl md:text-5xl font-extrabold text-gray-900 ">
                     {product.name}
                 </h1>
-                <p className="mt-4 text-2xl font-bold text-gray-900 dark:text-gray-200">
+                <p className="mt-4 text-2xl font-bold text-gray-900 ">
                     ${product.price.toFixed(2)}
                 </p>
 
-                <p className="mt-6 text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+                <p className="mt-6 text-gray-600  text-lg leading-relaxed">
                     {product.description}
                 </p>
 
@@ -63,14 +63,14 @@ export default function ProductDetail() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4 mt-auto">
-                    <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shrink-0">
+                    <div className="flex items-center border border-gray-300  rounded-lg overflow-hidden shrink-0">
                         <button
-                            className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                            className="px-4 py-3 bg-gray-100  hover:bg-gray-200  transition"
                             onClick={() => setQuantity(Math.max(1, quantity - 1))}
                         >-</button>
-                        <span className="px-6 py-3 font-semibold dark:text-white">{quantity}</span>
+                        <span className="px-6 py-3 font-semibold ">{quantity}</span>
                         <button
-                            className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                            className="px-4 py-3 bg-gray-100  hover:bg-gray-200  transition"
                             onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                         >+</button>
                     </div>

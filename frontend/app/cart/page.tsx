@@ -25,8 +25,8 @@ export default function Cart() {
         <div className="max-w-4xl mx-auto">
             <h1 className="text-3xl font-extrabold mb-8">Shopping Cart</h1>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden mb-8">
-                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="bg-white  rounded-2xl shadow-sm overflow-hidden mb-8">
+                <ul className="divide-y divide-gray-200 ">
                     {cart.map(item => (
                         <li key={item.id} className="p-6 flex flex-col sm:flex-row items-center gap-6">
                             <div className="relative h-24 w-24 bg-gray-100 rounded-lg overflow-hidden shrink-0">
@@ -39,14 +39,14 @@ export default function Cart() {
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+                                <div className="flex items-center border border-gray-300  rounded-lg overflow-hidden">
                                     <button onClick={() => {
                                         if (item.quantity > 1) {
                                             addToCart({ ...item, quantity: -1 })
                                         }
-                                    }} className="px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                                    }} className="px-3 py-1 hover:bg-gray-100 ">-</button>
                                     <span className="px-4 py-1">{item.quantity}</span>
-                                    <button onClick={() => addToCart({ ...item, quantity: 1 })} className="px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                                    <button onClick={() => addToCart({ ...item, quantity: 1 })} className="px-3 py-1 hover:bg-gray-100 ">+</button>
                                 </div>
                                 <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-700 p-2">
                                     <Trash2 size={20} />
@@ -57,7 +57,7 @@ export default function Cart() {
                 </ul>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div className="bg-gray-50  p-8 rounded-2xl border border-gray-200  flex flex-col sm:flex-row justify-between items-center gap-6">
                 <div>
                     <p className="text-lg text-gray-500 mb-1">Total</p>
                     <p className="text-4xl font-extrabold">${total.toFixed(2)}</p>

@@ -23,16 +23,16 @@ export default function Orders() {
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">
-            <h1 className="text-3xl font-extrabold mb-8 text-gray-900 dark:text-white">Order History</h1>
+            <h1 className="text-3xl font-extrabold mb-8 text-gray-900 ">Order History</h1>
 
             {orders.length === 0 ? (
-                <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm text-center">
+                <div className="bg-white  p-8 rounded-2xl shadow-sm text-center">
                     <p className="text-gray-500 text-lg">You haven't placed any orders yet.</p>
                 </div>
             ) : (
                 <div className="relative overflow-x-auto shadow-md sm:rounded-2xl">
-                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table className="w-full text-sm text-left text-gray-500 ">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
                             <tr>
                                 <th scope="col" className="px-6 py-4">Order ID</th>
                                 <th scope="col" className="px-6 py-4">Date</th>
@@ -42,8 +42,8 @@ export default function Orders() {
                         </thead>
                         <tbody>
                             {orders.map((order: any) => (
-                                <tr key={order.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition">
-                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <tr key={order.id} className="bg-white border-b   hover:bg-gray-50  transition">
+                                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                         {order.id.split('-')[0]}...
                                     </td>
                                     <td className="px-6 py-4">
@@ -54,7 +54,7 @@ export default function Orders() {
                                             {order.status}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-right font-bold text-gray-900 dark:text-white">
+                                    <td className="px-6 py-4 text-right font-bold text-gray-900 ">
                                         ${order.total_price.toFixed(2)}
                                     </td>
                                 </tr>

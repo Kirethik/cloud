@@ -32,11 +32,11 @@ export default function Home() {
 
     return (
         <div className="space-y-8">
-            <div className="text-center bg-primary-50 dark:bg-gray-800 py-12 rounded-3xl">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+            <div className="text-center bg-primary-50  py-12 rounded-3xl">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900  mb-4">
                     Welcome to AzureShop
                 </h1>
-                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                <p className="text-lg text-gray-600  max-w-2xl mx-auto">
                     Built on Microsoft Azure using App Service, Static Web Apps, Cosmos DB, and Redis.
                 </p>
             </div>
@@ -48,7 +48,7 @@ export default function Home() {
                         onClick={() => setCategory(c)}
                         className={`px-4 py-2 rounded-full font-medium transition-colors ${category === c
                             ? 'bg-primary-600 text-white'
-                            : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300'
+                            : 'bg-gray-200  text-gray-800  hover:bg-gray-300'
                             }`}
                     >
                         {c}

@@ -16,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
     const { addToCart } = useCart();
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <div className="bg-white  rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <Link href={`/products/${product.id}`}>
                 <div className="relative h-64 w-full bg-gray-200">
                     <Image
@@ -35,11 +35,11 @@ export default function ProductCard({ product }: { product: Product }) {
                     {product.category}
                 </span>
                 <Link href={`/products/${product.id}`} className="block">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 line-clamp-1">
+                    <h3 className="text-lg font-bold text-gray-900  hover:text-primary-600  line-clamp-1">
                         {product.name}
                     </h3>
                 </Link>
-                <p className="mt-2 text-xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">
+                <p className="mt-2 text-xl font-extrabold text-gray-900  mb-4">
                     ${product.price.toFixed(2)}
                 </p>
 

@@ -53,28 +53,28 @@ export default function Checkout() {
 
     return (
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8">
-            <div className="md:w-2/3 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm">
+            <div className="md:w-2/3 bg-white  p-8 rounded-2xl shadow-sm">
                 <h2 className="text-2xl font-bold mb-6">Shipping Details</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium mb-1">Full Name</label>
-                        <input {...register("fullName")} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:ring-2 outline-none" />
+                        <input {...register("fullName")} className="w-full p-3 border rounded-lg   focus:ring-2 outline-none" />
                         {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-1">Address</label>
-                        <input {...register("address")} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:ring-2 outline-none" />
+                        <input {...register("address")} className="w-full p-3 border rounded-lg   focus:ring-2 outline-none" />
                         {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
                     </div>
                     <div className="flex gap-4">
                         <div className="w-1/2">
                             <label className="block text-sm font-medium mb-1">City</label>
-                            <input {...register("city")} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:ring-2 outline-none" />
+                            <input {...register("city")} className="w-full p-3 border rounded-lg   focus:ring-2 outline-none" />
                             {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
                         </div>
                         <div className="w-1/2">
                             <label className="block text-sm font-medium mb-1">Zip Code</label>
-                            <input {...register("zipCode")} className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:ring-2 outline-none" />
+                            <input {...register("zipCode")} className="w-full p-3 border rounded-lg   focus:ring-2 outline-none" />
                             {errors.zipCode && <p className="text-red-500 text-sm mt-1">{errors.zipCode.message}</p>}
                         </div>
                     </div>
@@ -89,17 +89,17 @@ export default function Checkout() {
             </div>
 
             <div className="md:w-1/3">
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-sm border dark:border-gray-700 sticky top-24">
+                <div className="bg-gray-50  p-6 rounded-2xl shadow-sm border  sticky top-24">
                     <h2 className="text-xl font-bold mb-6">Order Summary</h2>
                     <div className="space-y-4 mb-6">
                         {cart.map(item => (
                             <div key={item.id} className="flex justify-between text-sm">
-                                <span className="text-gray-600 dark:text-gray-300">{item.quantity} x {item.name}</span>
+                                <span className="text-gray-600 ">{item.quantity} x {item.name}</span>
                                 <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
                             </div>
                         ))}
                     </div>
-                    <div className="border-t dark:border-gray-600 pt-4 flex justify-between">
+                    <div className="border-t  pt-4 flex justify-between">
                         <span className="text-lg font-bold">Total</span>
                         <span className="text-2xl font-extrabold text-primary-600">${total.toFixed(2)}</span>
                     </div>
