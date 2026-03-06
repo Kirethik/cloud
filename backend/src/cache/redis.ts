@@ -10,12 +10,17 @@ let redisClient: Redis;
 export const connectRedis = () => {
     const telemetry = getTelemetryClient();
 
-    if (!env.AZURE_REDIS_CONNECTIONSTRING) {
-        console.warn("⚠️ Redis connection string not provided. Caching disabled.");
-        return;
-    }
-
-    redisClient = new Redis(env.AZURE_REDIS_CONNECTIONSTRING);
+    redisClient = new Redis({
+        host: env.REDIS_HOST,
+        port: 6380,
+        password: env.REDIS_PASSWORD || undefined,
+        tls: {
+            servername: env.REDIS_HOST
+        },
+        connectTimeout: 10000,
+        maxRetriesPerRequest: null,
+        enableReadyCheck: false
+    });
 
     redisClient.on('connect', () => {
         console.log(`✅ Azure Redis Cache connected at ${env.REDIS_HOST}:${env.REDIS_PORT}`);
