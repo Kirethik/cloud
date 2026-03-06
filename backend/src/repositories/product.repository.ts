@@ -1,7 +1,6 @@
 import { getCosmosContainer } from '../database/cosmos';
 import { Product } from '../models/types';
 import { v4 as uuidv4 } from 'uuid';
-import { getRedisClient } from '../cache/redis';
 
 export class ProductRepository {
     private get container() {
@@ -15,8 +14,12 @@ export class ProductRepository {
     }
 
     async getById(id: string): Promise<Product | null> {
-        const { resource } = await this.container.item(id, id).read<Product>();
-        return resource || null;
+        const querySpec = {
+            query: 'SELECT * FROM c WHERE c.id = @id',
+            parameters: [{ name: '@id', value: id }]
+        };
+        const { resources } = await this.container.items.query<Product>(querySpec).fetchAll();
+        return resources.length > 0 ? resources[0] : null;
     }
 
     async create(data: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>): Promise<Product> {

@@ -9,7 +9,6 @@ import { setupAppInsights } from './telemetry/appInsights';
 
 import { connectCosmosDB } from './database/cosmos';
 import { connectSqlDB } from './database/sql';
-import { connectRedis } from './cache/redis';
 import { connectBlobStorage } from './storage/blob';
 
 import routes from './routes';
@@ -64,6 +63,5 @@ app.listen(PORT, async () => {
     // Here we'll fire them asynchronously. If they fail, process exits.
     await connectCosmosDB();
     await connectSqlDB();
-    connectRedis();
     await connectBlobStorage();
 });
