@@ -1,3 +1,6 @@
+import dns from 'dns';
+dns.setDefaultResultOrder('ipv4first');
+
 import Redis from 'ioredis';
 import { env } from '../config/env';
 import { getTelemetryClient } from '../telemetry/appInsights';
@@ -16,7 +19,7 @@ export const connectRedis = () => {
         host: env.REDIS_HOST,
         port: parseInt(env.REDIS_PORT),
         password: env.REDIS_PASSWORD || undefined,
-        tls: env.REDIS_PASSWORD ? {} : undefined, // Azure Redis typically requires TLS
+        tls: {},
     });
 
     redisClient.on('connect', () => {
