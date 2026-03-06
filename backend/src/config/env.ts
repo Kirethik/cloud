@@ -22,6 +22,7 @@ const envSchema = z.object({
     REDIS_HOST: z.string().optional(),
     REDIS_PORT: z.string().default('6380'),
     REDIS_PASSWORD: z.string().optional(),
+    AZURE_REDIS_CONNECTIONSTRING: z.string().optional(),
 
     AZURE_STORAGE_CONNECTION_STRING: z.string().optional(),
 
