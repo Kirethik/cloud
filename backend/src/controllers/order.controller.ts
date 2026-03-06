@@ -80,3 +80,51 @@ export const getOrderById = async (req: Request, res: Response, next: NextFuncti
         next(err);
     }
 };
+
+import { productRepository } from '../repositories/product.repository';
+
+export const getAdminStats = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (!req.user) {
+            throw Object.assign(new Error('User must be logged in'), { statusCode: 401 });
+        }
+
+        const orders = await prisma.order.findMany();
+        const totalSales = orders.reduce((acc, order) => acc + order.total_price, 0);
+        const activeOrders = orders.filter(o => o.status === 'PENDING').length;
+
+        const products = await productRepository.getAll();
+
+        res.status(200).json({
+            success: true,
+            data: {
+                totalSales,
+                activeOrders,
+                totalProducts: products.length
+            }
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getTelemetry = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (!req.user) {
+            throw Object.assign(new Error('User must be logged in'), { statusCode: 401 });
+        }
+
+        // Simulating Azure App Insights metrics for the requested UI
+        res.status(200).json({
+            success: true,
+            data: {
+                requests: Math.floor(Math.random() * 500) + 1500,
+                serverResTime: Math.floor(Math.random() * 50) + 120, // ms
+                failedRequests: Math.floor(Math.random() * 10),
+                availability: 99.98
+            }
+        });
+    } catch (err) {
+        next(err);
+    }
+};

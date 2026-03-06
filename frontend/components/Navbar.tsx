@@ -54,6 +54,7 @@ export default function Navbar() {
 
                     {isMounted && token ? (
                         <div className="flex items-center space-x-4">
+                            <Link href="/admin" className="text-gray-600 font-semibold text-sm mr-2 hover:text-primary-600">Merchant</Link>
                             <Link href="/orders" className="text-gray-600 ">Orders</Link>
                             <button onClick={handleLogout} className="text-sm font-medium text-gray-600 ">Logout</button>
                         </div>

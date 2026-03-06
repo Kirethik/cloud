@@ -7,7 +7,7 @@ import {
     updateProduct,
     deleteProduct
 } from '../controllers/product.controller';
-import { createOrder, getOrderById, getUserOrders } from '../controllers/order.controller';
+import { createOrder, getOrderById, getUserOrders, getAdminStats, getTelemetry } from '../controllers/order.controller';
 import { protect } from '../middleware/auth.middleware';
 import { uploadImage } from '../controllers/upload.controller';
 
@@ -41,6 +41,12 @@ orderRouter.route('/:id')
 
 // Uploads Routes
 const uploadRouter = Router();
+
+// Admin / Telemetry Routes
+const adminRouter = Router();
+adminRouter.get('/stats', protect, getAdminStats);
+adminRouter.get('/telemetry', protect, getTelemetry);
+
 import multer from 'multer';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -50,6 +56,7 @@ uploadRouter.post('/upload-image', protect, upload.single('image'), uploadImage)
 router.use('/auth', authRouter);
 router.use('/products', productRouter);
 router.use('/orders', orderRouter);
+router.use('/admin', adminRouter);
 router.use('/', uploadRouter);
 
 export default router;
