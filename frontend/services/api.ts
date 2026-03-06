@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// Defaults to localhost if env API URL not set
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+const API_URL = 'https://ecommerce-backend.azurewebsites.net/api/v1';
 
 export const api = axios.create({
     baseURL: API_URL,
