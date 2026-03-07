@@ -28,7 +28,7 @@ export default function Navbar() {
         <nav className="bg-white  shadow-sm sticky top-0 z-50">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <Link href="/" className="text-xl font-bold text-primary-600 ">
-                    AzureShop
+                    KirethikShop
                 </Link>
 
                 <div className="flex-grow max-w-md mx-6 hidden md:flex items-center">

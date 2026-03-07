@@ -34,11 +34,8 @@ export default function Home() {
         <div className="space-y-8">
             <div className="text-center bg-primary-50  py-12 rounded-3xl">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900  mb-4">
-                    Welcome to AzureShop
+                    Welcome to KirethikShop
                 </h1>
-                <p className="text-lg text-gray-600  max-w-2xl mx-auto">
-                    Built on Microsoft Azure using App Service, Static Web Apps, Cosmos DB, and Redis.
-                </p>
             </div>
 
             <div className="flex justify-center space-x-4 mb-8">
